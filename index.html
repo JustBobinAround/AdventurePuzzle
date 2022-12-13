@@ -2,7 +2,7 @@
 <textarea id="chat-input"></textarea>
 <p id="chat-messages"></p>
 
-<!-- JavaScript -->
+<script>
 var input = document.getElementById('chat-input');
 var messages = document.getElementById('chat-messages');
 
@@ -19,3 +19,4 @@ input.addEventListener('keydown', function(event) {
     messages.innerHTML += '<p>' + value + '</p>';
   }
 });
+</script>
