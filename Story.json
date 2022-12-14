@@ -1,0 +1,49 @@
+{
+	"id":0,
+	"title":"story A",
+	"info":"you wake up in the woods",
+	"Outcome":[
+	{
+		"id":0,
+		"info":"outcomeA",
+		"Choice":[
+		{
+			"id":0,
+			"info":"Choice 0: chop down some trees",
+			"outcomePointer":0
+			},
+		{
+			"id":1,
+			"info":"Choice 1: look around",
+			"outcomePointer":1
+			},
+		{
+			"id":2,
+			"info":"Choice 2: say hi",
+			"outcomePointer":0
+			}
+		]
+		},
+	{
+		"id":1,
+		"info":"outcomeB",
+		"Choice":[
+		{
+			"id":0,
+			"info":"Choice 0: chop down some trees",
+			"outcomePointer":0
+			},
+		{
+			"id":1,
+			"info":"Choice 1: look around",
+			"outcomePointer":1
+			},
+		{
+			"id":2,
+			"info":"Choice 2: say hello",
+			"outcomePointer":0
+			}
+		]
+		}
+	]
+	}
