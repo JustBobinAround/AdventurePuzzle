@@ -1,6 +1,8 @@
 
+
 var outcomeIndex = 0;
 var currentOutcome;
+var aquiredItems = ['NO_ITEM'];
 
 var input = document.getElementById('choice-input');
 var messages = document.getElementById('story-messages');
@@ -14,7 +16,20 @@ $.getJSON('./Story.json', function(data) {
 }); 
 
 //var Outcome = storyJson.Story.Outcome[0];
+function printOutcome(){
+  console.log('hit');
+  var sb = '<hr><p>' + currentOutcome.info+'<br>';
+  for(let i = 0; i < currentOutcome.choices.length; i++){
+    sb += '<br><b>' + i + '</b> : '+currentOutcome.choices[i].info;
+  }
+  sb += '</p><br>';
 
+  messages.innerHTML += sb;
+}
+function printWarning(text){
+  var sb = '<p>' + text +'<br></p>';
+  messages.innerHTML += sb;
+}
 //const Story = JSON.parse(jsonData);
 // Listen for the user to press enter in the input field
 input.addEventListener('keydown', function(event) {
@@ -34,27 +49,37 @@ input.addEventListener('keydown', function(event) {
   }
 });
 function updateOutcome(){
-  currentOutcome = Story.Outcome[outcomeIndex];
-  console.log(currentOutcome);
+  currentOutcome = Story.outcomes[outcomeIndex];
 }
-function printOutcome(){
-  var sb = '<hr><p>' + currentOutcome.info+'<br>';
-  for(let i = 0; i < currentOutcome.Choice.length; i++){
-    sb += '<br>' + currentOutcome.Choice[i].info;
-  }
-  sb += '</p>';
-  messages.innerHTML += sb;
-}
+
 function checkChoice(choice){
   var unknownID = true;
-  for(let i = 0; i < currentOutcome.Choice.length; i++){
-    if(currentOutcome.Choice[i].id==choice){
-      outcomeIndex = currentOutcome.Choice[i].outcomePointer;
+  for(let i = 0; i < currentOutcome.choices.length; i++){
+    if(currentOutcome.choices[i].id==choice){
+      if(hasItem(currentOutcome.choices[i].requiredItem)){
+        outcomeIndex = currentOutcome.choices[i].outcomePointer;
+        if(hasItem(currentOutcome.choices[i].givenItem)==false){
+          aquiredItems.push(currentOutcome.choices[i].givenItem);
+          printWarning('You aquired a '+currentOutcome.choices[i].givenItem);
+        }
+        i = currentOutcome.choices.length;
+      }else{
+        printWarning('You lack the required item.');
+      }
+      
       unknownID = false;
-      i = currentOutcome.Choice.length;
     }
   }
   if(unknownID){
-    console.log("unknown choice");
+    printWarning('That choice does not exist.');
   }
+}
+
+function hasItem(requiredItem){
+  for(let i = 0; i < aquiredItems.length; i++){
+    if(aquiredItems[i]==requiredItem){
+      return true;
+    }
+  }
+  return false;
 }
