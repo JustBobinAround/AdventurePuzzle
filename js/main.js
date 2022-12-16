@@ -48,7 +48,7 @@ function checkChoice(choice){
 
   for(let i = 0; i < currentOutcome.choices.length; i++){
     if(currentOutcome.choices[i].id==choice){
-      printWarning('You entered <b>'+currentOutcome.choices[i].info+'</b>.');
+      printWarning('You chose <b>'+currentOutcome.choices[i].info+'</b>.');
       if(hasItem(currentOutcome.choices[i].requiredItem)){
         outcomeIndex = currentOutcome.choices[i].outcomePointer;
         if(hasItem(currentOutcome.choices[i].givenItem)==false){
