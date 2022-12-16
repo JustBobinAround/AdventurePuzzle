@@ -19,7 +19,7 @@ function printOutcome(){
   console.log('hit');
   var sb = '<hr><p>' + currentOutcome.info+'<br>';
   for(let i = 0; i < currentOutcome.choices.length; i++){
-    sb += '<br><a onclick = "handleChoiceClick('+i+')">'+currentOutcome.choices[i].info+'</a>';
+    sb += '<br><a onclick = "handleChoiceClick('+currentOutcome.id+','+i+')">'+currentOutcome.choices[i].info+'</a>';
   }
   sb += '</p><br>';
 
@@ -29,14 +29,16 @@ function printWarning(text){
   var sb = '<p>' + text +'<br></p>';
   messages.innerHTML += sb;
 }
-function handleChoiceClick(choice){
+function handleChoiceClick(outcomeId,choice){
   updateOutcome();
-  checkChoice(choice);
-  updateOutcome();
-  
-  // Add the message to the chatbox
-  printOutcome();
-  bottomAnchor.scrollIntoView();
+  if(outcomeId==currentOutcome.id){
+    checkChoice(choice);
+    updateOutcome();
+    
+    // Add the message to the chatbox
+    printOutcome();
+    bottomAnchor.scrollIntoView();
+  }
 }
 
 function updateOutcome(){
