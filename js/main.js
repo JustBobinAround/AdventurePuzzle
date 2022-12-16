@@ -19,7 +19,7 @@ function printOutcome(){
   console.log('hit');
   var sb = '<hr><p>' + currentOutcome.info+'<br>';
   for(let i = 0; i < currentOutcome.choices.length; i++){
-    sb += '<br><a onclick = "handleChoiceClick('+i+')"><b>' + i + '</b> : '+currentOutcome.choices[i].info+'</a>';
+    sb += '<br><a onclick = "handleChoiceClick('+i+')">'+currentOutcome.choices[i].info+'</a>';
   }
   sb += '</p><br>';
 
@@ -48,7 +48,7 @@ function checkChoice(choice){
 
   for(let i = 0; i < currentOutcome.choices.length; i++){
     if(currentOutcome.choices[i].id==choice){
-      printWarning('You entered <b>'+currentOutcome.choices[i].id+'</b>.');
+      printWarning('You entered <b>'+currentOutcome.choices[i].info+'</b>.');
       if(hasItem(currentOutcome.choices[i].requiredItem)){
         outcomeIndex = currentOutcome.choices[i].outcomePointer;
         if(hasItem(currentOutcome.choices[i].givenItem)==false){
